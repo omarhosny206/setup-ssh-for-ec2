@@ -14,7 +14,7 @@
 
 ## Usage:
 ```yaml
-name: SSH Setup Workflow
+name: Setup SSH for EC2 instance
 
 on:
   push:
@@ -24,10 +24,17 @@ on:
 jobs:
   setup-ssh:
     runs-on: ubuntu-latest
+    env:
+      EC2_SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+      EC2_URL: ${{ secrets.EC2_URL }}
+      EC2_USERNAME: ${{ secrets.EC2_USERNAME }}
     steps:
     - name: Setup SSH for EC2
       uses: omarhosny206/setup-ssh-for-ec2@v1.0.0
       with:
-        EC2_SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
-        EC2_URL: ${{ secrets.EC2_URL }}
+          EC2_SSH_PRIVATE_KEY: $EC2_SSH_PRIVATE_KEY
+          EC2_URL: $EC2_URL
+    # then you can run commands/scripts directly on the EC2 instance e.g.:
+    - name: Create a new file on the EC2 instance with "hello-world"
+      run: ssh -o StrictHostKeyChecking=no $EC2_USERNAME@$EC2_URL "echo "hello-world" >> new_file.txt"
 ```
