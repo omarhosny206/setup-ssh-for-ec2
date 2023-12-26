@@ -1,4 +1,4 @@
-name: 'Setup SSH for EC2'
+name: 'Set up SSH for EC2'
 description: 'Set up SSH for connecting to an EC2 instance'
 
 inputs:
@@ -11,6 +11,7 @@ inputs:
 
 runs:
   using: 'composite'
+  shell: bash
   steps:
     - name: Setup SSH for EC2
       run: |
