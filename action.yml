@@ -1,0 +1,10 @@
+name: 'Set up SSH for EC2'
+description: 'Set up SSH for connecting to an EC2 instance'
+
+inputs:
+  EC2_SSH_PRIVATE_KEY:
+    description: 'The private key of EC2 instance for SSH connection'
+    required: true
+  EC2_URL:
+    description: 'The URL of the EC2 instance'
+    required: true
