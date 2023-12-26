@@ -11,9 +11,9 @@ inputs:
 
 runs:
   using: 'composite'
-  shell: bash
   steps:
     - name: Setup SSH for EC2
+      shell: bash
       run: |
         mkdir -p ~/.ssh
         echo "${{ inputs.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
