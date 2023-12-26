@@ -1,4 +1,4 @@
-name: 'Set up SSH for EC2'
+name: 'Setup SSH for EC2'
 description: 'Set up SSH for connecting to an EC2 instance'
 
 inputs:
