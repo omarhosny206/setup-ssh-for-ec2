@@ -9,15 +9,14 @@ inputs:
     description: 'The URL of the EC2 instance'
     required: true
 
-jobs:
-  setup-ssh:
-    runs-on: ubuntu-latest
-    steps:
+runs:
+  using: 'composite'
+  steps:
     - name: Setup SSH for EC2
       run: |
         mkdir -p ~/.ssh
-        echo "$EC2_SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+        echo "${{ inputs.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         eval $(ssh-agent -s)
         ssh-add ~/.ssh/id_rsa
-        ssh-keyscan -H $EC2_URL >> ~/.ssh/known_hosts
+        ssh-keyscan -H "${{ inputs.EC2_URL }}" >> ~/.ssh/known_hosts
